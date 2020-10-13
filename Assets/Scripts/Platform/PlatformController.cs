@@ -29,7 +29,8 @@ public class PlatformController : MonoBehaviour
 
         if(waypoints.Count > 0)
         {
-            Invoke("Patrol", 4f);
+            //First patrol point takes half of the time to move
+            Invoke("Patrol", patrolTime / 2);
         }
     }
 
@@ -41,9 +42,10 @@ public class PlatformController : MonoBehaviour
 
         Debug.Log("Index: " + index);
         //Depending on the index, change the patrol time
+        //Patrol Time Moving: Patrol Time When Moving Corners
+        //Patrol Time: Patrol Time For Longer Distances / Waiting For User
         switch (index)
         {
-
             case 1:
                 usedPatrolTime = patrolTimeMoving;
                 break;
@@ -71,6 +73,7 @@ public class PlatformController : MonoBehaviour
 
     void Tick()
     {
+        //Continues moving the object towards the current waypoint
         agent.destination = waypoints[index].position;
 
     }//end of Tick
